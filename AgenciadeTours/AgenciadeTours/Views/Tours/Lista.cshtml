@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AgenciadeTours.Models.Tour>
+
+@{
+    ViewData["Title"] = "Tours";
+}
+
+<h1 class="mb-3">Listado de Tours</h1>
+
+<p>
+    <a asp-action="Crear" class="btn btn-primary">Agregar</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>País</th>
+            <th>Destino</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Precio</th>
+            <th>ITBIS</th>
+            <th>Duración</th>
+            <th>Fecha/Hora Fin</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Pais?.Nombre</td>
+                <td>@item.Destino?.Nombre</td>
+                <td>@item.Fecha.ToString("yyyy-MM-dd")</td>
+                <td>@item.Hora</td>
+                <td>@item.Precio.ToString("C")</td>
+                <td>@item.ITBIS.ToString("C")</td>
+                <td>@($"{item.Duracion_Dias} días {item.Duracion_Horas} horas")</td>
+                <td>@item.FechaHoraFin</td>
+                <td>
+                    @if (item.Estado == "Vigente")
+                    {
+                        <span class="badge bg-success">Vigente</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">No vigente</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Editar" asp-route-id="@item.TourID" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Eliminar" asp-route-id="@item.TourID" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

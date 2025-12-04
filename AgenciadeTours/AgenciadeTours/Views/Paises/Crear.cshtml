@@ -1,0 +1,29 @@
+﻿@model AgenciadeTours.Models.Pais
+
+@{
+    ViewData["Title"] = "Agregar un País";
+}
+
+<h2>Agregar Pais</h2>
+
+<form asp-action="Crear" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a asp-action="Lista" class="btn btn-secondary">Mostrar</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

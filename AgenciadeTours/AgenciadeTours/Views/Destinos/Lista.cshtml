@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AgenciadeTours.Models.Destino>
+
+@{
+    ViewData["Title"] = "Listado de Destinos";
+}
+
+<h2>Destinos</h2>
+
+<p>
+    <a asp-action="Crear" class="btn btn-primary">Agregar</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>País</th>
+            <th>Días</th>
+            <th>Horas</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Pais?.Nombre</td>
+                <td>@item.Dias_Duracion</td>
+                <td>@item.Horas_Duracion</td>
+                <td>
+                    <a asp-action="Editar" asp-route-id="@item.DestinoID" class="btn btn-sm btn-warning">Actualizar</a>
+                    <a asp-action="Eliminar" asp-route-id="@item.DestinoID" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

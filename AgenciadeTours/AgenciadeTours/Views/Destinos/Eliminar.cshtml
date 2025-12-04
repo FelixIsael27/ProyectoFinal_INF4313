@@ -1,0 +1,38 @@
+﻿@model AgenciadeTours.Models.Destino
+
+@{
+    ViewData["Title"] = "Eliminar el Destino";
+}
+
+<h2>Eliminar el Destino</h2>
+
+<h4>¿Estás seguro que deseas eliminar este destino?</h4>
+
+<div>
+    <h4>Destino</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-2">ID</dt>
+        <dd class="col-sm-10">@Model.DestinoID</dd>
+
+        <dt class="col-sm-2">Nombre</dt>
+        <dd class="col-sm-10">@Model.Nombre</dd>
+
+        <dt class="col-sm-2">País</dt>
+        <dd class="col-sm-10">@Model.Pais?.Nombre</dd>
+
+        <dt class="col-sm-2">Días</dt>
+        <dd class="col-sm-10">@Model.Dias_Duracion</dd>
+
+        <dt class="col-sm-2">Horas</dt>
+        <dd class="col-sm-10">@Model.Horas_Duracion</dd>
+    </dl>
+</div>
+
+<form asp-action="Eliminar" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="DestinoID" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Lista" class="btn btn-secondary">Cancelar</a>
+</form>

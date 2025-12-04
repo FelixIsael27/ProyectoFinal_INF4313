@@ -1,0 +1,31 @@
+﻿@model AgenciadeTours.Models.Pais
+
+@{
+    ViewData["Title"] = "Editar País";
+}
+
+<h2>Editar el País</h2>
+
+<form asp-action="Editar" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="PaisID" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a asp-action="Lista" class="btn btn-secondary">Volver a la Lista</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

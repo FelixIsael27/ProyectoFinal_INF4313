@@ -1,0 +1,29 @@
+﻿@model AgenciadeTours.Models.Tour
+
+@{
+    ViewData["Title"] = "Eliminar Tour";
+}
+
+<h1 class="text-danger">Eliminar Tour</h1>
+
+<h3>¿Estás seguro de cancelar este tour?</h3>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.Nombre</dd>
+
+        <dt class="col-sm-3">Destino</dt>
+        <dd class="col-sm-9">@Model.Destino?.Nombre</dd>
+
+        <dt class="col-sm-3">Fecha</dt>
+        <dd class="col-sm-9">@Model.Fecha.ToString("yyyy-MM-dd")</dd>
+    </dl>
+</div>
+
+<form asp-action="Eliminar" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="TourID" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Lista" class="btn btn-secondary">Cancelar</a>
+</form>

@@ -1,0 +1,50 @@
+﻿@model AgenciadeTours.Models.Destino
+
+@{
+    ViewData["Title"] = "Editar un Destino";
+}
+
+<h2>Editar el Destino</h2>
+
+<form asp-action="Editar" method="post">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="DestinoID" />
+
+    <div class="form-group">
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PaisID">País</label>
+        <select asp-for="PaisID" asp-items="ViewBag.PaisID" class="form-control"></select>
+        <span asp-validation-for="PaisID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Dias_Duracion"></label>
+        <input asp-for="Dias_Duracion" class="form-control" />
+        <span asp-validation-for="Dias_Duracion" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Horas_Duracion"></label>
+        <input asp-for="Horas_Duracion" class="form-control" />
+        <span asp-validation-for="Horas_Duracion" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a asp-action="Lista" class="btn btn-secondary">Volver a la Lista</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

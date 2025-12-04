@@ -1,0 +1,86 @@
+﻿@model AgenciadeTours.Models.Tour
+
+@{
+    ViewData["Title"] = "Editar Tour";
+}
+
+<h1>Editar un Tour</h1>
+
+<form asp-action="Editar" method="post">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="TourID" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PaisID"></label>
+        <select asp-for="PaisID" asp-items="ViewBag.PaisID" class="form-select"></select>
+        <span asp-validation-for="PaisID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DestinoID"></label>
+        <select asp-for="DestinoID" asp-items="ViewBag.DestinoID" class="form-select"></select>
+        <span asp-validation-for="DestinoID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Fecha"></label>
+        <input asp-for="Fecha" type="date" class="form-control" />
+        <span asp-validation-for="Fecha" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Hora"></label>
+        <input asp-for="Hora" type="time" class="form-control" />
+        <span asp-validation-for="Hora" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Precio"></label>
+        <input asp-for="Precio" class="form-control" />
+        <span asp-validation-for="Precio" class="text-danger"></span>
+    </div>
+
+    <hr />
+
+    <h4>Datos calculados</h4>
+
+    <div class="mb-3">
+        <label>Duración</label>
+        <input class="form-control" value="@($"{Model.Duracion_Dias} días / {Model.Duracion_Horas} horas")" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha y hora fin</label>
+        <input class="form-control" value="@Model.FechaHoraFin" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label>ITBIS</label>
+        <input class="form-control" value="@Model.ITBIS" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label>Estado</label>
+        <input class="form-control" value="@Model.Estado" disabled />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Lista" class="btn btn-secondary">Volver a la Lista</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
