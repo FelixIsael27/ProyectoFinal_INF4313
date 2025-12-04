@@ -9,7 +9,7 @@ namespace AgenciadeTours.Models
         public int DestinoID { get; set; }
 
         [Required, StringLength(150)]
-        public required string Nombre { get; set; }
+        public string Nombre { get; set; }
 
         [Required]
         [ForeignKey(nameof(Pais))]

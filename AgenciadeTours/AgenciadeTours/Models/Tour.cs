@@ -9,7 +9,7 @@ namespace AgenciadeTours.Models
         public int TourID { get; set; }
 
         [Required, StringLength(200)]
-        public required string Nombre { get; set; }
+        public string Nombre { get; set; }
 
         [Required]
         [ForeignKey(nameof(Pais))]
