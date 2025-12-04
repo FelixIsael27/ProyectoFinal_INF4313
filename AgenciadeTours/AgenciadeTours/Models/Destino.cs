@@ -14,7 +14,7 @@ namespace AgenciadeTours.Models
         [Required]
         [ForeignKey(nameof(Pais))]
         public int PaisID { get; set; }
-        public virtual Pais Pais { get; set; } = null!;
+        public virtual Pais? Pais { get; set; } = null!;
 
         [Range(0, 365, ErrorMessage = "Días de duración inválidos.")]
         public int Dias_Duracion { get; set; }

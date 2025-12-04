@@ -13,8 +13,6 @@
 
     <input type="hidden" asp-for="TourID" />
 
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
     <div class="mb-3">
         <label asp-for="Nombre"></label>
         <input asp-for="Nombre" class="form-control" />
@@ -55,25 +53,35 @@
 
     <h4>Datos calculados</h4>
 
-    <div class="mb-3">
-        <label>Duración</label>
-        <input class="form-control" value="@($"{Model.Duracion_Dias} días / {Model.Duracion_Horas} horas")" disabled />
-    </div>
+    @if (Model != null)
+    {
+        <div class="mb-3">
+            <label>Duración (Días / Horas)</label>
+            <input class="form-control" value=" @Model.Duracion_Dias días / @Model.Duracion_Horas horas" disabled />
+        </div>
 
-    <div class="mb-3">
-        <label>Fecha y hora fin</label>
-        <input class="form-control" value="@Model.FechaHoraFin" disabled />
-    </div>
+        <div class="mb-3">
+            <label>Fecha y hora fin</label>
+            <input class="form-control" value="@Model.FechaHoraFin" disabled />
+        </div>
 
-    <div class="mb-3">
-        <label>ITBIS</label>
-        <input class="form-control" value="@Model.ITBIS" disabled />
-    </div>
+        <div class="mb-3">
+            <label>ITBIS</label>
+            <input class="form-control" value="@Model.ITBIS" disabled />
+        </div>
 
-    <div class="mb-3">
-        <label>Estado</label>
-        <input class="form-control" value="@Model.Estado" disabled />
-    </div>
+        <div class="mb-3">
+            <label>Estado</label>
+            <input class="form-control" value="@Model.Estado" disabled />
+        </div>
+    }
+    else
+    {
+        <div class="mb-3">
+            <label>Duración (Días / Horas)</label>
+            <input class="form-control" value="—" disabled />
+        </div>
+    }
 
     <button type="submit" class="btn btn-primary">Guardar cambios</button>
     <a asp-action="Lista" class="btn btn-secondary">Volver a la Lista</a>

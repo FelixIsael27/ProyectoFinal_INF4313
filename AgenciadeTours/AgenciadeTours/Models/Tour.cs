@@ -9,17 +9,17 @@ namespace AgenciadeTours.Models
         public int TourID { get; set; }
 
         [Required, StringLength(200)]
-        public string Nombre { get; set; }
+        public required string Nombre { get; set; }
 
         [Required]
         [ForeignKey(nameof(Pais))]
         public int PaisID { get; set; }
-        public virtual Pais Pais { get; set; } = null!;
+        public virtual Pais? Pais { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(Destino))]
         public int DestinoID { get; set; }
-        public virtual Destino Destino { get; set; } = null!;
+        public virtual Destino? Destino { get; set; } = null!;
 
         [Required]
         [DataType(DataType.Date)]

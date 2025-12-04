@@ -23,8 +23,6 @@ namespace AgenciadeTours.Controllers
 
         public IActionResult Crear()
         {
-            ViewData["Title"] = "Nuevo Tour";
-
             ViewBag.PaisID = new SelectList(_context.Paises, "PaisID", "Nombre");
             ViewBag.DestinoID = new SelectList(_context.Destinos, "DestinoID", "Nombre");
             return View();
@@ -34,8 +32,6 @@ namespace AgenciadeTours.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Crear(Tour tour)
         {
-            ViewData["Title"] = "Nuevo Tour";
-
             if (_context.Tours.Any(t => t.TourID == tour.TourID))
             {
                 ModelState.AddModelError("TourID", "El ID del tour ya existe.");
@@ -55,6 +51,20 @@ namespace AgenciadeTours.Controllers
             if (tour.Fecha.Date < DateTime.Now.Date)
             {
                 ModelState.AddModelError("Fecha", "La fecha no puede ser una fecha pasada.");
+            }
+
+            if (destino != null)
+            {
+                tour.Destino = destino;
+                var pais = _context.Paises.Find(tour.PaisID);
+                if (pais == null)
+                {
+                    ModelState.AddModelError("PaisID", "El país seleccionado no existe.");
+                }
+                else
+                {
+                    tour.Pais = pais;
+                }
             }
 
             if (!ModelState.IsValid)
@@ -83,7 +93,7 @@ namespace AgenciadeTours.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(int id, Tour tour)
+        public async Task<IActionResult> Editar(int? id, Tour tour)
         {
             if (id != tour.TourID)
             {
@@ -91,7 +101,6 @@ namespace AgenciadeTours.Controllers
             }
 
             var tourDb = await _context.Tours.AsNoTracking().FirstOrDefaultAsync(t => t.TourID == id);
-
             if (tourDb == null)
             {
                 ModelState.AddModelError("", "El Tour no existe.");
@@ -108,7 +117,21 @@ namespace AgenciadeTours.Controllers
                 ModelState.AddModelError("Fecha", "La fecha no puede ser pasada.");
             }
 
-            if (ModelState.IsValid)
+            if (destino != null)
+            {
+                tour.Destino = destino;
+                var pais = _context.Paises.Find(tour.PaisID);
+                if (pais == null)
+                {
+                    ModelState.AddModelError("PaisID", "El país seleccionado no existe.");
+                }
+                else
+                {
+                    tour.Pais = pais;
+                }
+            }
+
+            if (!ModelState.IsValid)
             {
                 ViewBag.PaisID = new SelectList(_context.Paises, "PaisID", "Nombre", tour.PaisID);
                 ViewBag.DestinoID = new SelectList(_context.Destinos, "DestinoID", "Nombre", tour.DestinoID);
